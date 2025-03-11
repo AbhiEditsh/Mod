@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% 
+// Define SEO variables to pass to the header
+const pageTitle = mod.title;
+const metaDescription = `Download ${mod.title} mod for Euro Truck Simulator 2. ${mod.description ? mod.description.substring(0, 155) : 'High-quality mod for ETS2 with detailed features and regular updates.'}...`;
+const metaKeywords = `${mod.title}, ${mod.category}, ETS2 mod, ${mod.game}, truck simulator mod, ${mod.tags ? mod.tags.join(', ') : 'Euro Truck Simulator 2'}`;
+const ogImage = mod.imageUrl || '/images/ets2-mods-og.jpg';
+const currentPath = `/mod/${mod._id}`;
+%>
+
+<body>
+    <%- include('partials/header', { 
+        pageTitle,
+        metaDescription,
+        metaKeywords,
+        ogImage,
+        currentPath
+    }) %>
+    
+    <!-- Structured data for this specific mod -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "<%= mod.title %>",
+      "operatingSystem": "Windows",
+      "applicationCategory": "GameMod",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "<%= mod.rating || '4.5' %>",
+        "ratingCount": "<%= mod.downloads || '100' %>"
+      },
+      "downloadUrl": "<%= mod.downloadUrl %>",
+      "screenshot": "<%= mod.imageUrl || '/images/ets2-mods-og.jpg' %>",
+      "softwareVersion": "<%= mod.version %>"
+    }
+    </script>
+
+        <main class="mod-details">
+            <div class="container">
+                <div class="mod-details">
+                    <div class="mod-header">
+                        <div class="mod-title-wrapper">
+                            <div class="title-container"
+                                style="background: rgba(255, 255, 255, 0.98); padding: 1.2rem; border-radius: 10px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);">
+                                <div
+                                    style="background: #ffffff; padding: 0.5rem 1rem; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);">
+                                    <h1 class="mod-title"><span class="title-text">
+                                            <%= mod.title %>
+                                        </span></h1>
+                                </div>
+                            </div>
+                            <div class="mod-primary-meta">
+                                <span class="game-tag">🎮 <%= mod.game %></span>
+                                <span class="category-tag">📁 <%= mod.category %></span>
+                                <span class="author-tag">👤 <%= mod.author %></span>
+                            </div>
+                        </div>
+                        <div class="mod-meta">
+                            <span class="version-tag"><i class="version-icon">📌</i><strong>v<%= mod.version %>
+                                </strong></span>
+                            <span><i class="downloads-icon">⬇️</i>
+                                <%= mod.downloads %> Downloads
+                            </span>
+                            <% if (mod.fileSize || mod.fileSize===0) { %>
+                                <span data-mod-id="<%= mod._id %>">
+                                    <i class="size-icon">📦</i>
+                                    <span class="size-display">
+                                        <%= mod.getFormattedSize() %>
+                                    </span>
+                                </span>
+                                <% } %>
+                        </div>
+                    </div>
+
+                    <div class="mod-images">
+                        <div class="images-grid">
+                            <% mod.images.forEach((image, index)=> { %>
+                                <div class="image-wrapper">
+                                    <img src="<%= image %>" alt="<%= mod.title %> - Image <%= index + 1 %>"
+                                        loading="lazy">
+                                </div>
+                                <% }) %>
+                        </div>
+                    </div>
+
+                    <div class="mod-description">
+                        <div class="description-container">
+                            <div class="description-header">
+                                <h2>About This Mod</h2>
+                                <div class="description-divider"></div>
+                            </div>
+                            <div class="description-content">
+                                <p>
+                                    <%= mod.description %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mod-actions">
+                        <div class="actions-container">
+                            <div class="actions-wrapper">
+                                <button type="button" class="like-button <%= isLiked ? 'liked' : '' %>"
+                                    data-mod-id="<%= mod._id %>" aria-label="Like this mod">
+                                    <span class="like-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="<%= isLiked ? 'currentColor' : 'none' %>"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" role="img" aria-label="heart icon">
+                                            <path
+                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="like-count" aria-label="<%= mod.likes %> likes">
+                                        <%= mod.likes %>
+                                    </span>
+                                </button>
+                                <a href="<%= mod.downloadUrl %>" class="btn-primary" target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Download <%= mod.title %><%= (mod.fileSize || mod.fileSize === 0) ? ' (' + mod.getFormattedSize() + ')' : '' %>">
+                                    <span class="download-icon">⬇️</span>
+                                    <span class="download-text">Download Mod</span>
+                                    <% if (mod.fileSize || mod.fileSize===0) { %>
+                                        <span class="download-size" data-mod-id="<%= mod._id %>">
+                                            (<span class="size-display">
+                                                <%= mod.getFormattedSize() %>
+                                            </span>)
+                                        </span>
+                                        <% } %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Mods Section -->
+                    <div class="related-mods">
+                        <div class="section-header">
+                            <h2>You Might Also Like</h2>
+                            <p class="section-subtitle">Similar mods from the same category</p>
+                        </div>
+                        <div class="related-mods-grid">
+                            <% relatedMods.forEach(relatedMod=> { %>
+                                <a href="/mod/<%= relatedMod._id %>" class="mod-card"
+                                    aria-label="View details for <%= relatedMod.title %>">
+                                    <div class="mod-card-image">
+                                        <img src="<%= relatedMod.images[0] %>" alt="<%= relatedMod.title %>"
+                                            loading="lazy">
+                                    </div>
+                                    <div class="mod-card-content">
+                                        <h3>
+                                            <%= relatedMod.title %>
+                                        </h3>
+                                        <p>
+                                            <%= relatedMod.description.substring(0, 100) %>...
+                                        </p>
+                                        <div class="mod-meta">
+                                            <span><i class="downloads-icon">⬇️</i>
+                                                <%= relatedMod.downloads %>
+                                            </span>
+                                            <span><i class="version-icon">🏷️</i> v<%= relatedMod.version %></span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('partials/footer') %>
+            <script src="/js/main.js" defer></script>
+</body>
+
+</html>

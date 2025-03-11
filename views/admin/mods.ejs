@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Mods - ETS2 Mods</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <ul>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/mods" class="active">Manage Mods</a></li>
+                    <li><a href="/admin/mods/add">Add New Mod</a></li>
+                    <li><a href="/admin/tutorials">Manage Tutorials</a></li>
+                    <li><a href="/admin/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="content-header">
+                <h1>Manage Mods</h1>
+                <a href="/admin/mods/add" class="btn-add">Add New Mod</a>
+            </div>
+
+            <div class="mods-list">
+                <table class="mods-table">
+                    <thead>
+                        <tr>
+                            <th>Game</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Version</th>
+                            <th>Downloads</th>
+                            <th>Date Added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% mods.forEach(mod=> { %>
+                            <tr>
+                                <td>
+                                    <%= mod.game %>
+                                </td>
+                                <td>
+                                    <img src="<%= mod.images[0] %>" alt="<%= mod.title %>" class="mod-thumbnail">
+                                </td>
+                                <td>
+                                    <%= mod.title %>
+                                </td>
+                                <td>
+                                    <%= mod.category %>
+                                </td>
+                                <td>
+                                    <%= mod.version %>
+                                </td>
+                                <td>
+                                    <%= mod.downloads %>
+                                </td>
+                                <td>
+                                    <%= new Date(mod.createdAt).toLocaleDateString() %>
+                                </td>
+                                <td class="actions">
+                                    <a href="/admin/mods/edit/<%= mod._id %>" class="btn-small">Edit</a>
+                                    <form action="/admin/mods/delete/<%= mod._id %>" method="POST" class="delete-form">
+                                        <button type="submit" class="btn-small btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this mod?')">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+    "name": "ets2-site",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js",
+        "seed": "node src/seed.js",
+        "download-images": "node src/downloadSampleImages.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^3.1.9"
+    },
+    "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "ejs": "^3.1.10",
+        "express": "^4.x.x",
+        "express-session": "^1.18.1",
+        "mongoose": "^x.x.x",
+        "multer": "^1.4.5-lts.1"
+    },
+    "description": ""
+}

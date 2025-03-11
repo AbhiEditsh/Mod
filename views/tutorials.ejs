@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETS2 Tutorials</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <main>
+            <section class="tutorials-section">
+                <div class="container">
+                    <h1>ETS2 Tutorials</h1>
+                    <div class="tutorials-grid">
+                        <% tutorials.forEach(tutorial=> { %>
+                            <article class="tutorial-card">
+                                <img src="<%= tutorial.thumbnail %>" alt="<%= tutorial.title %>"
+                                    class="tutorial-thumbnail">
+                                <div class="tutorial-content">
+                                    <h2 class="tutorial-title">
+                                        <%= tutorial.title %>
+                                    </h2>
+                                    <div class="tutorial-meta">
+                                        <span>By <%= tutorial.author %></span>
+                                        <span>
+                                            <%= new Date(tutorial.dateAdded).toLocaleDateString() %>
+                                        </span>
+                                    </div>
+                                    <p class="tutorial-description">
+                                        <%= tutorial.description %>
+                                    </p>
+                                    <a href="/tutorials/<%= tutorial._id %>" class="btn btn-secondary">Read More</a>
+                                </div>
+                            </article>
+                            <% }) %>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>

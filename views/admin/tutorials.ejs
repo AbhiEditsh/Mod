@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Tutorials - ETS2 Mods</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <ul>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/mods">Manage Mods</a></li>
+                    <li><a href="/admin/mods/add">Add New Mod</a></li>
+                    <li><a href="/admin/tutorials" class="active">Manage Tutorials</a></li>
+                    <li><a href="/admin/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="content-header">
+                <h1>Manage Tutorials</h1>
+                <a href="/admin/tutorials/add" class="btn-add">Add New Tutorial</a>
+            </div>
+
+            <div class="tutorials-list">
+                <table class="tutorials-table">
+                    <thead>
+                        <tr>
+                            <th>Thumbnail</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date Added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% tutorials.forEach(tutorial=> { %>
+                            <tr>
+                                <td>
+                                    <% if (tutorial.thumbnail) { %>
+                                        <img src="<%= tutorial.thumbnail %>" alt="<%= tutorial.title %>"
+                                            class="tutorial-thumbnail">
+                                        <% } else { %>
+                                            <div class="no-thumbnail">No Image</div>
+                                            <% } %>
+                                </td>
+                                <td>
+                                    <%= tutorial.title %>
+                                </td>
+                                <td>
+                                    <%= tutorial.author %>
+                                </td>
+                                <td>
+                                    <%= new Date(tutorial.createdAt).toLocaleDateString() %>
+                                </td>
+                                <td class="actions">
+                                    <a href="/admin/tutorials/edit/<%= tutorial._id %>" class="btn-small">Edit</a>
+                                    <form action="/admin/tutorials/delete/<%= tutorial._id %>" method="POST"
+                                        class="delete-form">
+                                        <button type="submit" class="btn-small btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this tutorial?')">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

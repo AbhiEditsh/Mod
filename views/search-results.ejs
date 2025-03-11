@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - ETS2 Mods</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>ETS2 Mods</h1>
+            </div>
+            <div class="search-container">
+                <form action="/search" method="GET" class="search-form">
+                    <input type="text" name="q" placeholder="Search mods..." value="<%= searchQuery %>" required>
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/category/Trucks">Trucks</a></li>
+                <li><a href="/category/Trailers">Trailers</a></li>
+                <li><a href="/category/Maps">Maps</a></li>
+                <li><a href="/category/Skins">Skins</a></li>
+                <li><a href="/tutorials">Tutorials</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-results-section">
+            <div class="container">
+                <h1>Search Results for "<%= searchQuery %>"</h1>
+                <% if (mods.length===0) { %>
+                    <div class="no-results">
+                        <p>No mods found matching your search.</p>
+                        <a href="/" class="btn">Back to Home</a>
+                    </div>
+                    <% } else { %>
+                        <p class="results-count">
+                            <%= mods.length %> mods found
+                        </p>
+                        <div class="mods-grid">
+                            <% mods.forEach(mod=> { %>
+                                <div class="mod-card">
+                                    <img src="<%= mod.images[0] %>" alt="<%= mod.title %>">
+                                    <h3>
+                                        <%= mod.title %>
+                                    </h3>
+                                    <p>
+                                        <%= mod.description.substring(0, 100) %>...
+                                    </p>
+                                    <div class="mod-meta">
+                                        <span>Downloads: <%= mod.downloads %></span>
+                                        <span>Version: <%= mod.version %></span>
+                                    </div>
+                                    <a href="/mod/<%= mod._id %>" class="btn">View Details</a>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } %>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ETS2 Mods. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

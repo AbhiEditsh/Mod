@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+    <div class="container">
+        <div class="category-header">
+            <h1>
+                <%= category %>
+            </h1>
+        </div>
+
+        <% if (mods && mods.length> 0) { %>
+            <div class="mods-grid">
+                <% mods.forEach(mod=> { %>
+                    <a href="/mod/<%= mod._id %>" class="mod-card">
+                        <img src="<%= mod.images[0] %>" alt="<%= mod.title %>">
+                        <h3>
+                            <%= mod.title %>
+                        </h3>
+                        <p>
+                            <%= mod.description %>
+                        </p>
+                        <div class="mod-meta">
+                            <span>Downloads: <%= mod.downloads %></span>
+                            <span>Version: <%= mod.version %></span>
+                        </div>
+                    </a>
+                    <% }) %>
+            </div>
+            <% } else { %>
+                <div class="no-mods">
+                    <h2>No mods available</h2>
+                    <p>Check back later for new mods!</p>
+                </div>
+                <% } %>
+
+                    <% if (totalPages> 1) { %>
+                        <div class="pagination">
+                            <a href="/?page=<%= currentPage - 1 %>"
+                                class="page-link <%= !hasPrevPage ? 'disabled' : '' %>">←
+                                Previous</a>
+
+                            <% for(let i=1; i <=Math.min(5, totalPages); i++) { %>
+                                <a href="/?page=<%= i %>" class="page-link <%= currentPage === i ? 'active' : '' %>">
+                                    <%= i %>
+                                </a>
+                                <% } %>
+
+                                    <% if (totalPages> 5) { %>
+                                        <span class="page-link">...</span>
+                                        <a href="/?page=<%= totalPages %>"
+                                            class="page-link <%= currentPage === totalPages ? 'active' : '' %>">
+                                            <%= totalPages %>
+                                        </a>
+                                        <% } %>
+
+                                            <a href="/?page=<%= currentPage + 1 %>"
+                                                class="page-link <%= !hasNextPage ? 'disabled' : '' %>">Next →</a>
+                        </div>
+                        <% } %>
+    </div>

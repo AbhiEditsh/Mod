@@ -1,0 +1,88 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' - ETS2 MODS' : 'ETS2 MODS - Euro Truck Simulator 2 Mods, Trucks, Maps & More' %></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Discover the best Euro Truck Simulator 2 mods, trucks, trailers, maps and skins. Download high-quality mods for ETS2 and enhance your trucking experience.' %>">
+    <meta name="keywords" content="<%= typeof metaKeywords !== 'undefined' ? metaKeywords : 'ETS2, Euro Truck Simulator 2, truck mods, ETS2 mods, truck skins, map mods, trailer mods, trucking, simulator mods' %>">
+    <meta name="author" content="ETS2 MODS">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://ets2mods.com' + (locals.currentPath || '') %>">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= typeof ogUrl !== 'undefined' ? ogUrl : 'https://ets2mods.com' + (locals.currentPath || '') %>">
+    <meta property="og:title" content="<%= typeof ogTitle !== 'undefined' ? ogTitle : (typeof pageTitle !== 'undefined' ? pageTitle + ' - ETS2 MODS' : 'ETS2 MODS - Euro Truck Simulator 2 Mods') %>">
+    <meta property="og:description" content="<%= typeof ogDescription !== 'undefined' ? ogDescription : (typeof metaDescription !== 'undefined' ? metaDescription : 'Find and download the best ETS2 mods, trucks, maps and more.') %>">
+    <meta property="og:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : '/images/ets2-mods-og.jpg' %>">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<%= typeof twitterUrl !== 'undefined' ? twitterUrl : 'https://ets2mods.com' + (locals.currentPath || '') %>">
+    <meta property="twitter:title" content="<%= typeof twitterTitle !== 'undefined' ? twitterTitle : (typeof pageTitle !== 'undefined' ? pageTitle + ' - ETS2 MODS' : 'ETS2 MODS - Euro Truck Simulator 2 Mods') %>">
+    <meta property="twitter:description" content="<%= typeof twitterDescription !== 'undefined' ? twitterDescription : (typeof metaDescription !== 'undefined' ? metaDescription : 'Find and download the best ETS2 mods, trucks, maps and more.') %>">
+    <meta property="twitter:image" content="<%= typeof twitterImage !== 'undefined' ? twitterImage : '/images/ets2-mods-og.jpg' %>">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Scripts -->
+    <script src="/js/main.js" defer></script>
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ETS2 MODS",
+      "url": "https://ets2mods.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://ets2mods.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+</head>
+
+<header>
+    <nav>
+        <div class="logo">
+            <a href="/" class="logo-link">
+                <h1>ETS2 MODS</h1>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="search-container">
+            <form action="/search" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Search mods..." value="<%= locals.searchQuery || '' %>"
+                    required>
+                <button type="submit" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/trucks">Trucks</a></li>
+            <li><a href="/trailers">Trailers</a></li>
+            <li><a href="/maps">Maps</a></li>
+            <li><a href="/skins">Skins</a></li>
+            <li><a href="/tutorials">Tutorials</a></li>
+        </ul>
+    </nav>
+</header>

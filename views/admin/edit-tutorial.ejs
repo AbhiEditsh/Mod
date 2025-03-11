@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Tutorial - ETS2 Mods</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <ul>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/mods">Manage Mods</a></li>
+                    <li><a href="/admin/mods/add">Add New Mod</a></li>
+                    <li><a href="/admin/tutorials" class="active">Manage Tutorials</a></li>
+                    <li><a href="/admin/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="content-header">
+                <h1>Edit Tutorial</h1>
+                <a href="/admin/tutorials" class="btn-back">Back to Tutorials</a>
+            </div>
+
+            <div class="edit-form-container">
+                <% if (locals.error) { %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                        <form action="/admin/tutorials/edit/<%= tutorial._id %>" method="POST"
+                            enctype="multipart/form-data" class="tutorial-form">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="title" value="<%= tutorial.title %>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea id="content" name="content" rows="10"
+                                    required><%= tutorial.content %></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="author">Author</label>
+                                <input type="text" id="author" name="author" value="<%= tutorial.author %>" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Current Thumbnail</label>
+                                <% if (tutorial.thumbnail) { %>
+                                    <div class="current-thumbnail">
+                                        <img src="<%= tutorial.thumbnail %>" alt="Current thumbnail">
+                                    </div>
+                                    <% } else { %>
+                                        <p>No thumbnail uploaded</p>
+                                        <% } %>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="thumbnail">New Thumbnail (optional)</label>
+                                <input type="file" id="thumbnail" name="thumbnail" accept="image/*">
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Update Tutorial</button>
+                                <a href="/admin/tutorials" class="btn-cancel">Cancel</a>
+                            </div>
+                        </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETS2 Mods</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <main>
+            <section class="latest-mods">
+                <div class="container">
+                    <h2>Latest Mods</h2>
+                    <div class="mods-grid">
+                        <% mods.forEach(mod=> { %>
+                            <a href="/mod/<%= mod._id %>" class="mod-card">
+                                <img src="<%= mod.images[0] %>" alt="<%= mod.title %>">
+                                <h3>
+                                    <%= mod.title %>
+                                </h3>
+                                <p>
+                                    <%= mod.description.substring(0, 100) %>...
+                                </p>
+                                <div class="mod-meta">
+                                    <span>Downloads: <%= mod.downloads %></span>
+                                    <span>Version: <%= mod.version %></span>
+                                </div>
+                            </a>
+                            <% }) %>
+                    </div>
+                    <div class="pagination">
+                        <a href="?page=<%= currentPage - 1 %>"
+                            class="pagination-btn prev <%= currentPage === 1 ? 'disabled' : '' %>">Previous</a>
+
+                        <% for(let i=1; i <=totalPages; i++) { %>
+                            <% if(i===1 || i===totalPages || (i>= currentPage - 2 && i <= currentPage + 2)) { %>
+                                    <a href="?page=<%= i %>"
+                                        class="pagination-btn <%= i === currentPage ? 'active' : '' %>">
+                                        <%= i %>
+                                    </a>
+                                    <% } else if(i===currentPage - 3 || i===currentPage + 3) { %>
+                                        <span class="pagination-dots">...</span>
+                                        <% } %>
+                                            <% } %>
+
+                                                <a href="?page=<%= currentPage + 1 %>"
+                                                    class="pagination-btn next <%= currentPage === totalPages ? 'disabled' : '' %>">
+                                                    Next
+                                                </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 ETS2 Mods. All rights reserved.</p>
+        </footer>
+</body>
+
+</html>
