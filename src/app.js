@@ -33,7 +33,7 @@ app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/modsdb';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://Mod:Mod25@mod.0vpr8.mongodb.net/?retryWrites=true&w=majority&appName=Mod';
 
 mongoose.connect(MONGODB_URI, {
     serverSelectionTimeoutMS: 5000,
